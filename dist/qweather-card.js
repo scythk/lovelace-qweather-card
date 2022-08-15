@@ -155,12 +155,9 @@ class WeatherCard extends LitElement {
       <ha-card @click="${this._handleClick}">
         ${this._config.current !== false ? this.renderCurrent(stateObj) : ""}
         ${this._config.details !== false ? this.renderDetails(stateObj, lang) : ""}
-        ${this._config.forecast !== false
-          ? this.renderForecast(stateObj.attributes.forecast, lang) : ""}
         ${this._config.forecast !== false ?
-          (this._config.hourly_forecast ? this.renderForecast(stateObj.attributes.forecast_hourly, lang) :
+          (this._config.hourly_forecast !== false ? this.renderForecast(stateObj.attributes.forecast_hourly, lang) :
           this.renderForecast(stateObj.attributes.forecast, lang)) : ""}
-        }
       </ha-card>
     `;
   }
