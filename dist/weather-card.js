@@ -6,7 +6,7 @@ const weatherIconsDay = {
   clear: "day",
   "clear-night": "night",
   cloudy: "cloudy",
-  fog: "cloudy",
+  fog: "fog-1",
   hail: "rainy-7",
   lightning: "thunder",
   "lightning-rainy": "thunder",
@@ -16,8 +16,12 @@ const weatherIconsDay = {
   snowy: "snowy-6",
   "snowy-rainy": "rainy-7",
   sunny: "day",
-  windy: "cloudy",
-  "windy-variant": "cloudy-day-3",
+  windy: "windy-1",
+  "windy-variant": "windy-1",
+  "partly-cloudy-night": "cloudy-night-3",
+  "weather-night-partly-cloudy": "cloudy-night-3",
+  "weather-pouring": "rainy-6",
+  "weather-snowy-heavy": "snowy-6",
   exceptional: "!!",
 };
 
@@ -152,8 +156,11 @@ class WeatherCard extends LitElement {
         ${this._config.current !== false ? this.renderCurrent(stateObj) : ""}
         ${this._config.details !== false ? this.renderDetails(stateObj, lang) : ""}
         ${this._config.forecast !== false
-          ? this.renderForecast(stateObj.attributes.forecast, lang)
-          : ""}
+          ? this.renderForecast(stateObj.attributes.forecast, lang) : ""}
+        ${this._config.forecast !== false ?
+          (this._config.hourly_forecast ? this.renderForecast(stateObj.attributes.forecast_hourly, lang) :
+          this.renderForecast(stateObj.attributes.forecast, lang)) : ""}
+        }
       </ha-card>
     `;
   }
@@ -174,11 +181,10 @@ class WeatherCard extends LitElement {
         ${this._config.name
           ? html` <span class="title"> ${this._config.name} </span> `
           : ""}
-        <span class="temp"
-          >${this.getUnit("temperature") == "°F"
+        <span class="temp">
+          ${this.getUnit("temperature") == "°F"
             ? Math.round(stateObj.attributes.temperature)
-            : stateObj.attributes.temperature}</span
-        >
+            : stateObj.attributes.temperature}</span>
         <span class="tempc"> ${this.getUnit("temperature")}</span>
       </div>
     `;
@@ -224,9 +230,7 @@ class WeatherCard extends LitElement {
           </span>
         </li>
         <li>
-          <ha-icon icon="mdi:weather-fog"></ha-icon> ${stateObj.attributes
-            .visibility}<span class="unit">
-            ${this.getUnit("length")}
+          <ha-icon icon="mdi:weather-fog"></ha-icon>AQI ${stateObj.attributes.aqi_num}<span class="unit">
           </span>
         </li>
         ${next_rising
@@ -269,9 +273,10 @@ class WeatherCard extends LitElement {
               <div class="day">
                 <div class="dayname">
                   ${this._config.hourly_forecast
-                    ? new Date(daily.datetime).toLocaleTimeString(lang, {
+                    ? new Date(daily.time).toLocaleTimeString(lang, {
                         hour: "2-digit",
                         minute: "2-digit",
+                        hour12: "false",
                       })
                     : new Date(daily.datetime).toLocaleDateString(lang, {
                         weekday: "short",
