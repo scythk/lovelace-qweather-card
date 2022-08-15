@@ -1,4 +1,9 @@
-# Lovelace animated weather card
+# Qweather card
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
+
+Added Qweather support with hourly forecast compatibility.
+
+Works well with [和风天气 Home Assistant 插件](https://github.com/cheny95/qweather).
 
 Originally created for the [old UI](https://community.home-assistant.io/t/custom-ui-weather-state-card-with-a-question/23008) converted by @arsaboo and @ciotlosm to [Lovelace](https://community.home-assistant.io/t/custom-ui-weather-state-card-with-a-question/23008/291) and now converted to Lit to make it even better.
 
@@ -29,24 +34,24 @@ Add the following to resources in your lovelace config:
 
 # Manual:
 
-1. Download the [weather-card.js](https://raw.githubusercontent.com/bramkragten/weather-card/v1.2.0/dist/weather-card.js) to `/config/www/custom-lovelace/weather-card/`. (or an other folder in `/config/www/`)
-2. Save, the [amCharts icons](https://www.amcharts.com/free-animated-svg-weather-icons/) (The contents of the folder "animated") under `/config/www/custom-lovelace/weather-card/icons/` (or an other folder in `/config/www/`)
-3. If you use Lovelace in storage mode, and want to use the editor, download the [weather-card-editor.js](https://raw.githubusercontent.com/bramkragten/weather-card/v1.2.0/dist/weather-card-editor.js) to `/config/www/custom-lovelace/weather-card/`. (or the folder you used above)
+1. Download the [weather-card.js](https://raw.githubusercontent.com/bramkragten/weather-card/v1.2.0/dist/weather-card.js) to `/config/www/community/lovelace-qweather-card/`. (or an other folder in `/config/www/`)
+2. Save, the [amCharts icons](https://www.amcharts.com/free-animated-svg-weather-icons/) (The contents of the folder "animated") under `/config/www/community/lovelace-qweather-card/icons/` (or an other folder in `/config/www/`)
+3. If you use Lovelace in storage mode, and want to use the editor, download the [weather-card-editor.js](https://raw.githubusercontent.com/bramkragten/weather-card/v1.2.0/dist/weather-card-editor.js) to `/config/www/community/lovelace-qweather-card/`. (or the folder you used above)
 
 Add the following to resources in your lovelace config:
 
 ```yaml
 resources:
-  - url: /local/custom-lovelace/weather-card/weather-card.js
+  - url: /local/community/lovelace-qweather-card/qweather-card.js
     type: module
 ```
 
 ## Configuration:
 
-And add a card with type `custom:weather-card`:
+And add a card with type `custom:qweather-card`:
 
 ```yaml
-type: custom:weather-card
+type: custom:qweather-card
 entity: weather.yourweatherentity
 name: Optional name
 ```
@@ -54,12 +59,12 @@ name: Optional name
 If you want to use your local icons add the location to the icons:
 
 ```yaml
-type: custom:weather-card
+type: custom:qweather-card
 entity: weather.yourweatherentity
-icons: "/local/custom-lovelace/weather-card/icons/"
+icons: "/local/community/lovelace-qweather-card/icons/"
 ```
 
-You can choose wich elements of the weather card you want to show:
+You can choose which elements of the weather card you want to show:
 
 The 3 different rows, being:
 
@@ -68,7 +73,7 @@ The 3 different rows, being:
 - The X day forecast or hourly forecast
 
 ```yaml
-type: custom:weather-card
+type: custom:qweather-card
 entity: weather.yourweatherentity
 current: true
 details: false
@@ -84,25 +89,17 @@ If you want to show the sunrise and sunset times, make sure the `sun` component 
 sun:
 ```
 
-### Dark Sky:
+### Qweather:
 
-When using Dark Sky you should put the mode to `daily` if you want a daily forecast with highs and lows.
-
-```yaml
-# Example configuration.yaml entry
-weather:
-  - platform: darksky
-    api_key: YOUR_API_KEY
-    mode: daily
-```
-
-### OpenWeather Map:
-
-When using OpenWeather map you can select hourly(default) or daily forecast to show.
+See [和风天气 Home Assistant 插件](https://github.com/cheny95/qweather) for details.
 
 ```yaml
 # Example configuration.yaml entry
 weather:
-  - platform: openweathermap
+  - platform: qweather
+    name: WEATHER_ENTITY_NAME
     api_key: YOUR_API_KEY
+    location: YOUR_LOCATION
+    default: 7
+    scan_interval: 600
 ```

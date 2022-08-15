@@ -1,7 +1,7 @@
 {
     "name": "QWeather Card",
     "render_readme": true,
-    "filename": "weather-card.js",
+    "filename": "qweather-card.js",
     "country": [
         "CN"
     ]

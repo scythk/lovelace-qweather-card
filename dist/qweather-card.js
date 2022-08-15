@@ -55,11 +55,11 @@ const windDirections = [
 
 window.customCards = window.customCards || [];
 window.customCards.push({
-  type: "weather-card",
-  name: "Weather Card",
+  type: "qweather-card",
+  name: "QWeather Card",
   description: "A custom weather card with animated icons.",
   preview: true,
-  documentationURL: "https://github.com/bramkragten/weather-card",
+  documentationURL: "https://github.com/scythk/lovelace-qweather-card",
 });
 
 const fireEvent = (node, type, detail, options) => {
@@ -101,8 +101,8 @@ class WeatherCard extends LitElement {
   }
 
   static async getConfigElement() {
-    await import("./weather-card-editor.js");
-    return document.createElement("weather-card-editor");
+    await import("./qweather-card-editor.js");
+    return document.createElement("qweather-card-editor");
   }
 
   static getStubConfig(hass, unusedEntities, allEntities) {
@@ -537,4 +537,4 @@ class WeatherCard extends LitElement {
     `;
   }
 }
-customElements.define("weather-card", WeatherCard);
+customElements.define("qweather-card", WeatherCard);
