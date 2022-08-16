@@ -9,40 +9,26 @@ Originally created for the [old UI](https://community.home-assistant.io/t/custom
 
 This card uses the awesome [animated SVG weather icons by amCharts](https://www.amcharts.com/free-animated-svg-weather-icons/).
 
-![Weather Card](https://github.com/bramkragten/custom-ui/blob/master/weather-card/weather-card.gif?raw=true)
+![Weather Card](./weather-card.gif)
 
 Thanks for all picking this card up.
 
 ## Installation:
+### Install with HACS (Recommended)
 
-You have 2 options, hosted or self hosted (manual). The first option needs internet and will update itself.
+Add `https://github.com/scythk/lovelace-qweather-card` to HACS Custom repositories and install.
 
-### If you are using Firefox:
+### Manual
 
-Firefox < 66 does not support all the needed functions yet for the editor.
-You change this by enabling `javascript.options.dynamicImport` in `about:config`.
-Or use the version without the editor: [Version without editor](https://raw.githubusercontent.com/bramkragten/custom-ui/58c41ad177b002e149497629a26ea10ccfeebcd0/weather-card/weather-card.js)
-
-# Hosted:
-
-Add the following to resources in your lovelace config:
-
-```yaml
-- url: https://cdn.jsdelivr.net/gh/bramkragten/weather-card/dist/weather-card.min.js
-  type: module
-```
-
-# Manual:
-
-1. Download the [weather-card.js](https://raw.githubusercontent.com/bramkragten/weather-card/v1.2.0/dist/weather-card.js) to `/config/www/community/lovelace-qweather-card/`. (or an other folder in `/config/www/`)
-2. Save, the [amCharts icons](https://www.amcharts.com/free-animated-svg-weather-icons/) (The contents of the folder "animated") under `/config/www/community/lovelace-qweather-card/icons/` (or an other folder in `/config/www/`)
-3. If you use Lovelace in storage mode, and want to use the editor, download the [weather-card-editor.js](https://raw.githubusercontent.com/bramkragten/weather-card/v1.2.0/dist/weather-card-editor.js) to `/config/www/community/lovelace-qweather-card/`. (or the folder you used above)
+1. Download the [weather-card.js](./dist/weather-card.js) to `/config/www/community/lovelace-qweather-card/`.
+2. Save the [amCharts icons](https://www.amcharts.com/free-animated-svg-weather-icons/) (The contents of the folder "animated") under `/config/www/community/lovelace-qweather-card/icons/`
+3. If you use Lovelace in storage mode, and want to use the editor, download the [weather-card-editor.js](./dist/qweather-card-editor.js) to `/config/www/community/lovelace-qweather-card/`.
 
 Add the following to resources in your lovelace config:
 
 ```yaml
 resources:
-  - url: /local/community/lovelace-qweather-card/qweather-card.js
+  - url: /hacsfiles/lovelace-qweather-card/qweather-card.js
     type: module
 ```
 
@@ -78,7 +64,7 @@ entity: weather.yourweatherentity
 current: true
 details: false
 forecast: true
-hourly_forecast: false
+hourly_forecast: true
 number_of_forecasts: 5
 ```
 

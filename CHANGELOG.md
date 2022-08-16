@@ -1,3 +1,9 @@
+## 2.0.0
+
+- Support qweather custom component
+- Added more weather icons
+- Added HACS compatibility
+
 ## 1.2.0
 
 - Added UI editor
