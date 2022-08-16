@@ -57,7 +57,7 @@ window.customCards = window.customCards || [];
 window.customCards.push({
   type: "qweather-card",
   name: "QWeather Card",
-  description: "A custom weather card with animated icons.",
+  description: "A custom Qweather card with animated icons.",
   preview: true,
   documentationURL: "https://github.com/scythk/lovelace-qweather-card",
 });
@@ -155,9 +155,8 @@ class WeatherCard extends LitElement {
       <ha-card @click="${this._handleClick}">
         ${this._config.current !== false ? this.renderCurrent(stateObj) : ""}
         ${this._config.details !== false ? this.renderDetails(stateObj, lang) : ""}
-        ${this._config.forecast !== false ?
-          (this._config.hourly_forecast !== false ? this.renderForecast(stateObj.attributes.forecast_hourly, lang) :
-          this.renderForecast(stateObj.attributes.forecast, lang)) : ""}
+        ${this._config.forecast !== false ? renderForecast(stateObj.attributes.forecast, lang, false) : ""}
+        ${this._config.hourly_forecast !== false ? renderForecast(stateObj.attributes.forecast_hourly, lang, true) : ""}
       </ha-card>
     `;
   }
@@ -250,7 +249,7 @@ class WeatherCard extends LitElement {
     `;
   }
 
-  renderForecast(forecast, lang) {
+  renderForecast(forecast, lang, hourlyFlag) {
     if (!forecast || forecast.length === 0) {
       return html``;
     }
@@ -269,7 +268,7 @@ class WeatherCard extends LitElement {
             (daily) => html`
               <div class="day">
                 <div class="dayname">
-                  ${this._config.hourly_forecast
+                  ${hourlyFlag !== false
                     ? new Date(daily.time).toLocaleTimeString(lang, {
                         hour: "2-digit",
                         minute: "2-digit",
@@ -324,7 +323,7 @@ class WeatherCard extends LitElement {
     return `${
       this._config.icons
         ? this._config.icons
-        : "https://cdn.jsdelivr.net/gh/bramkragten/weather-card/dist/icons/"
+        : "https://cdn.jsdelivr.net/gh/scythk/lovelace-qweather-card/dist/icons/"
     }${
       sun && sun.state == "below_horizon"
         ? weatherIconsNight[condition]
