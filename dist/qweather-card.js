@@ -270,11 +270,12 @@ class WeatherCard extends LitElement {
               <div class="day">
                 <div class="dayname">
                   ${this._config.hourly_forecast
-                    ? new Date(daily.time).toLocaleTimeString(lang, {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        hour12: "false",
-                      })
+                    // ? new Date(daily.time).toLocaleTimeString(lang, {
+                    //     hour: "2-digit",
+                    //     minute: "2-digit",
+                    //     hour12: "false",
+                    //   })
+                    ? $stateObj.attributes.time
                     : new Date(daily.datetime).toLocaleDateString(lang, {
                         weekday: "short",
                       })}
