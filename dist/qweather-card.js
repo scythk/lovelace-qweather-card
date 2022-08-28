@@ -18,10 +18,10 @@ const weatherIconsDay = {
   sunny: "day",
   windy: "windy-1",
   "windy-variant": "windy-1",
-  "partly-cloudy-night": "cloudy-night-3",
-  "weather-night-partly-cloudy": "cloudy-night-3",
-  "weather-pouring": "rainy-6",
-  "weather-snowy-heavy": "snowy-6",
+  "partly-cloudy-night-fill": "cloudy-night-3",
+  "cloudy-night-fill": "cloudy-night-3",
+  "extreme-rain": "rainy-6",
+  "heavy-snow": "snowy-6",
   exceptional: "!!",
 };
 
